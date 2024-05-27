@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logout-button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+.logout-button:hover {
+  background-color: #f0f0f0;
+}
