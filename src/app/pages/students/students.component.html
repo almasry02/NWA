@@ -1,1 +1,21 @@
-<p>students works!</p>
+<div class="container-fluid bg-light py-5">
+  <div class="container">
+    <h1 class="text-center text-primary mb-4">Willkommen auf Ihrem Noten-Dashboard</h1>
+    <p class="text-primary mb-4">Eingeloggt als: {{loggedInUser}}</p>
+    <p class="text-center mb-4">Bitte wählen Sie ein Fach aus, um Ihre Noten anzuzeigen:</p>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <ul class="list-group">
+          <li *ngFor="let subject of subjects" class="list-group-item">
+            <a href="#" (click)="viewGrades(subject)" class="text-primary">{{subject}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="selectedSubject" class="mt-4">
+      <h2 class="text-primary">Noten für {{selectedSubject}}</h2>
+      <p class="text-secondary">Hier werden die Noten für das ausgewählte Fach angezeigt...</p>
+    </div>
+    <button class="btn btn-primary mt-4" (click)="logout()">Abmelden</button>
+  </div>
+</div>

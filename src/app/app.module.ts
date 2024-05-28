@@ -8,7 +8,12 @@ import { FooterComponent } from './sections/footer/footer.component';
 import { TeacherComponent } from './pages/teacher/teacher.component';
 import { StudentsComponent } from './pages/students/students.component';
 import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
+
+import { EmailService } from "./Model/emai";
+import {HttpClientModule} from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,13 +23,17 @@ import { RegisterComponent } from './pages/register/register.component';
     TeacherComponent,
     StudentsComponent,
     LoginComponent,
-    RegisterComponent
   ],
+
+
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [EmailService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,62 @@
-<app-header></app-header>
-<h1>Teacher works properly</h1>
-<app-footer></app-footer>
-
+<div class="container-fluid bg-light py-5" [@fadeInOut]>
+  <div class="container">
+    <div class="text-center mb-4">
+      <img src="assets/logo.png" alt="School Logo" width="100">
+    </div>
+    <h1 class="text-center text-primary mb-4">Willkommen auf Ihrer Lehrer-Seite</h1>
+    <p class="text-primary mb-4">Eingeloggt als: {{loggedInUser}}, Fach: {{loggedInUserSubject}}</p><!-- Display logged in user and subject -->
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <h3 class="text-primary">Klassen auswählen:</h3>
+        <ul class="list-group" [@fadeInOut]>
+          <li *ngFor="let className of classes" class="list-group-item list-group-item-action">
+            <a href="#" (click)="selectClass(className)">{{className}}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4" *ngIf="selectedClass" [@fadeInOut]>
+        <h3 class="text-primary">Schüler in {{selectedClass}}:</h3>
+        <ul class="list-group">
+          <li *ngFor="let student of students[selectedClass]" class="list-group-item list-group-item-action">
+            <a href="#" (click)="selectStudent(student)">{{student}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-4" *ngIf="selectedStudent" [@fadeInOut]>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="selectSubject" class="text-primary">Fach auswählen:</label>
+          <select class="form-control" id="selectSubject" [(ngModel)]="selectedSubject">
+            <option value="">Bitte auswählen</option>
+            <option [value]="loggedInUserSubject">{{loggedInUserSubject}}</option> <!-- Only display the logged in user's subject -->
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-4" *ngIf="selectedStudent && selectedSubject" [@fadeInOut]>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="selectMark" class="text-primary">Note auswählen:</label>
+          <select class="form-control" id="selectMark" [(ngModel)]="selectedMark">
+            <option value="">Bitte auswählen</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="k.A">k.A</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-4" *ngIf="selectedStudent && selectedSubject && selectedMark" [@fadeInOut]>
+      <div class="col-md-6">
+        <button class="btn btn-primary btn-block" (click)="assignMark()">Note zuweisen</button>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <button class="btn btn-primary" (click)="logout()">Abmelden</button>
+    </div>
+  </div>
+</div>

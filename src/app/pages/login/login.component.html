@@ -1,28 +1,27 @@
-<div class="container mt-5">
+<div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card">
+        <div class="card-header bg-primary text-white text-center">
+          <h2>Login</h2>
+        </div>
         <div class="card-body">
-          <h3 class="card-title">Anmelden</h3>
           <form>
             <div class="form-group">
-              <label for="email">E-Mail-Adresse</label>
-              <input type="email" class="form-control" id="email" placeholder="E-Mail">
+              <label for="textInputUS">Username:</label>
+              <input type="text" id="textInputUS" name="textInput" [(ngModel)]="email" class="form-control">
             </div>
             <div class="form-group">
-              <label for="password">Passwort</label>
-              <input type="password" class="form-control" id="password" placeholder="Passwort">
+              <label for="textInputPW">Password:</label>
+              <input type="password" id="textInputPW" name="textInput" [(ngModel)]="password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary">Anmelden</button>
+            <button (click)="onClick(email, password)" class="btn btn-primary btn-block">Login</button>
           </form>
-          <hr>
-          <p class="text-center">Noch kein Mitglied? <a href="#">Registrieren</a></p>
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- Verwende Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
