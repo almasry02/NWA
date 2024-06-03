@@ -1,0 +1,85 @@
+/* Reset some default margins and paddings */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.container-fluid {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header styles */
+header {
+  width: 100%;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 0.75rem 1rem;
+}
+
+header .btn-primary {
+  background-color: #0a5d93;
+  border-color: #0a5d93;
+}
+
+header .btn-primary:hover {
+  background-color: darken(#0a5d93, 10%);
+  border-color: darken(#0a5d93, 10%);
+}
+
+/* Footer styles */
+footer {
+  width: 100%;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e7e7e7;
+  margin-top: auto;
+  padding: 0.75rem 1rem;
+}
+
+/* Main content adjustments */
+main {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+}
+
+main h1 {
+  color: #0a5d93;
+  margin-top: -100px; /* Verschiebt die Überschrift höher */
+}
+
+main .text-primary {
+  color: #0a5d93;
+}
+
+main .text-secondary {
+  color: #6c757d;
+}
+
+/* Subject Card Styles */
+.subject-card {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.subject-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.subject-card .card-title {
+  font-size: 1.25rem;
+  margin: 0;
+  color: #0a5d93; /* Einheitliche Farbe gemäß der Logout-Button */
+}
+
+.subject-card .card-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

@@ -1,21 +1,43 @@
-<div class="container-fluid bg-light py-5">
-  <div class="container">
-    <h1 class="text-center text-primary mb-4">Willkommen auf Ihrem Noten-Dashboard</h1>
-    <p class="text-primary mb-4">Eingeloggt als: {{loggedInUser}}</p>
-    <p class="text-center mb-4">Bitte wählen Sie ein Fach aus, um Ihre Noten anzuzeigen:</p>
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <ul class="list-group">
-          <li *ngFor="let subject of subjects" class="list-group-item">
-            <a href="#" (click)="viewGrades(subject)" class="text-primary">{{subject}}</a>
-          </li>
-        </ul>
+<div class="container-fluid p-0">
+  <!-- Header Section -->
+  <header class="d-flex justify-content-between align-items-center p-3 border-bottom">
+    <div class="d-flex align-items-center">
+      <div class="ms-5 text-secondary">
+        <p class="mb-0">Eingeloggt als: {{loggedInUser}}</p>
       </div>
     </div>
-    <div *ngIf="selectedSubject" class="mt-4">
-      <h2 class="text-primary">Noten für {{selectedSubject}}</h2>
-      <p class="text-secondary">Hier werden die Noten für das ausgewählte Fach angezeigt...</p>
+    <div>
+      <button class="btn btn-primary" (click)="logout()">Abmelden</button>
     </div>
-    <button class="btn btn-primary mt-4" (click)="logout()">Abmelden</button>
-  </div>
+  </header>
+
+  <!-- Main Content Section -->
+  <main class="flex-grow-1 d-flex align-items-center justify-content-center bg-light py-5">
+    <div class="container">
+      <h1 class="text-center mb-4" style="color: #0a5d93;">Willkommen auf Ihrem Noten-Dashboard</h1>
+      <p class="text-center mb-4">Bitte wählen Sie ein Fach aus, um Ihre Noten anzuzeigen:</p>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-6 mb-4" *ngFor="let subject of subjects">
+              <div class="card subject-card h-100" (click)="viewGrades(subject)">
+                <div class="card-body text-center">
+                  <h5 class="card-title">{{subject}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="selectedSubject" class="mt-4">
+        <h2 style="color: #0a5d93;">Noten für {{selectedSubject}}</h2>
+        <p class="text-secondary">Hier werden die Noten für das ausgewählte Fach angezeigt...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="text-center p-3 border-top">
+    <p>&copy; 2024 HTL Donaustadt. Alle Rechte vorbehalten.</p>
+  </footer>
 </div>
