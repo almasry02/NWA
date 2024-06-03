@@ -1,27 +1,43 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header bg-primary text-white text-center">
-          <h2>Login</h2>
-        </div>
-        <div class="card-body">
-          <form>
-            <div class="form-group">
-              <label for="textInputUS">Username:</label>
-              <input type="text" id="textInputUS" name="textInput" [(ngModel)]="email" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="textInputPW">Password:</label>
-              <input type="password" id="textInputPW" name="textInput" [(ngModel)]="password" class="form-control">
-            </div>
-            <button (click)="onClick(email, password)" class="btn btn-primary btn-block">Login</button>
-          </form>
+<div class="container-fluid p-0">
+  <!-- Header Section -->
+  <header class="d-flex justify-content-between align-items-center p-3 border-bottom">
+    <div class="logo">
+      <img src="assets/logo.png" alt="Logo" style="height: 50px;">
+    </div>
+    <div class="school-name">
+      <h4>HTL Donaustadt</h4>
+    </div>
+  </header>
+
+  <!-- Main Content Section -->
+  <main class="flex-grow-1 d-flex align-items-center justify-content-center">
+    <div class="row justify-content-center w-100">
+      <div class="col-md-6">
+        <h2 class="text-center my-4">Frühwarnsystem</h2>
+        <div class="card">
+          <div class="card-header text-white text-center" style="background-color: #0a5d93;">
+            <h2>Einloggen</h2>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="textInputUS">Benutzername:</label>
+                <input type="text" id="textInputUS" name="textInput" [(ngModel)]="email" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="textInputPW">Kennwort:</label>
+                <input type="password" id="textInputPW" name="textInput" [(ngModel)]="password" class="form-control">
+              </div>
+              <button (click)="onClick(email, password)" class="btn btn-primary btn-block mt-3">Einloggen</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="text-center p-3 border-top">
+    <p>&copy; 2024 HTL Donaustadt. Alle Rechte vorbehalten.</p>
+  </footer>
 </div>
-
-
-

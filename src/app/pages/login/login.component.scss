@@ -1,0 +1,75 @@
+/* Reset some default margins and paddings */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.container-fluid {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header styles */
+header {
+  width: 100%;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 0.75rem 1rem;
+  margin: 0;  /* Ensure no margin above the header */
+  top: 0;
+  position: fixed;
+}
+
+header .logo img {
+  height: 50px;
+  display: block;
+}
+
+header .school-name h4 {
+  margin: 0;
+}
+
+/* Footer styles */
+footer {
+  width: 100%;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e7e7e7;
+  margin-top: auto;
+  padding: 0.75rem 1rem;
+}
+
+/* Main content adjustments */
+main {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main h2 {
+  margin-bottom: 1.5rem;
+}
+
+.card-header {
+  background-color: #0a5d93 !important;
+}
+
+.card-header h2 {
+  margin: 0;
+}
+
+.btn-primary {
+  background-color: #0a5d93;
+  border-color: #0a5d93;
+}
+
+.btn-primary:hover {
+  background-color: darken(#0a5d93, 10%);
+  border-color: darken(#0a5d93, 10%);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
