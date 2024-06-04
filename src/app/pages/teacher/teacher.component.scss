@@ -1,0 +1,53 @@
+.container-fluid {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-body {
+  background-color: white;
+  flex-grow: 1;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.selection-area {
+  margin-bottom: 20px;
+
+  h3 {
+    color: #0a5d93;
+    margin-bottom: 10px;
+  }
+
+  select {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #0a5d93;
+    border-radius: 4px;
+    color: #0a5d93;
+
+    option {
+      color: #0a5d93;
+      background-color: white;
+    }
+  }
+}
+
+.btn-primary {
+  background-color: #0a5d93;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken(#0a5d93, 10%);
+  }
+}
+.text-primary {
+  color: #0a5d93 !important; // Change text color to blue
+}

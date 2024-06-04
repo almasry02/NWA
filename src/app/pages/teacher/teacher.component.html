@@ -1,62 +1,107 @@
-<div class="container-fluid bg-light py-5" [@fadeInOut]>
-  <div class="container">
-    <div class="text-center mb-4">
-      <img src="assets/logo.png" alt="School Logo" width="100">
-    </div>
-    <h1 class="text-center text-primary mb-4">Willkommen auf Ihrer Lehrer-Seite</h1>
-    <p class="text-primary mb-4">Eingeloggt als: {{loggedInUser}}, Fach: {{loggedInUserSubject}}</p><!-- Display logged in user and subject -->
-    <div class="row justify-content-center">
-      <div class="col-md-4">
-        <h3 class="text-primary">Klassen auswählen:</h3>
-        <ul class="list-group" [@fadeInOut]>
-          <li *ngFor="let className of classes" class="list-group-item list-group-item-action">
-            <a href="#" (click)="selectClass(className)">{{className}}</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-md-4" *ngIf="selectedClass" [@fadeInOut]>
-        <h3 class="text-primary">Schüler in {{selectedClass}}:</h3>
-        <ul class="list-group">
-          <li *ngFor="let student of students[selectedClass]" class="list-group-item list-group-item-action">
-            <a href="#" (click)="selectStudent(student)">{{student}}</a>
-          </li>
-        </ul>
+<div class="container-fluid p-0">
+  <!-- Header Section -->
+  <header class="d-flex justify-content-between align-items-center p-3 border-bottom">
+    <div class="d-flex align-items-center">
+      <div class="ms-5 text-secondary">
+        <p class="mb-0">Eingeloggt als: {{loggedInUser}}</p>
       </div>
     </div>
-    <div class="row justify-content-center mt-4" *ngIf="selectedStudent" [@fadeInOut]>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="selectSubject" class="text-primary">Fach auswählen:</label>
-          <select class="form-control" id="selectSubject" [(ngModel)]="selectedSubject">
-            <option value="">Bitte auswählen</option>
-            <option [value]="loggedInUserSubject">{{loggedInUserSubject}}</option> <!-- Only display the logged in user's subject -->
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row justify-content-center mt-4" *ngIf="selectedStudent && selectedSubject" [@fadeInOut]>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="selectMark" class="text-primary">Note auswählen:</label>
-          <select class="form-control" id="selectMark" [(ngModel)]="selectedMark">
-            <option value="">Bitte auswählen</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="k.A">k.A</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row justify-content-center mt-4" *ngIf="selectedStudent && selectedSubject && selectedMark" [@fadeInOut]>
-      <div class="col-md-6">
-        <button class="btn btn-primary btn-block" (click)="assignMark()">Note zuweisen</button>
-      </div>
-    </div>
-    <div class="text-center mt-4">
+    <div>
       <button class="btn btn-primary" (click)="logout()">Abmelden</button>
     </div>
-  </div>
+  </header>
+
+  <!-- Main Content Section -->
+  <main class="flex-grow-1 d-flex align-items-center justify-content-center py-5">
+    <div class="container">
+      <h1 class="text-center mb-4">Eintragung von Noten und Frühwarnungen</h1>
+      <div class="row justify-content-center">
+        <p class="text-secondary">Wählen Sie aus einer Klasse einen Schüler um diesem in einem Fach eine Note/Frühwarnung einzutragen</p>
+        <div class="col-md-4">
+          <h3 class="text-primary">Klasse auswählen:</h3>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="classDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Klassen
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="classDropdown">
+              <li *ngFor="let className of classes" (click)="selectClass(className)">
+                <a class="dropdown-item">{{className}}</a>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="selectedClass" class="mt-3">
+            Ausgewählte Klasse: {{selectedClass}}
+          </div>
+        </div>
+        <div class="col-md-4" *ngIf="selectedClass">
+          <h3 class="text-primary">Schüler auswählen:</h3>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="studentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Schüler
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="studentDropdown">
+              <li *ngFor="let student of students[selectedClass]" (click)="selectStudent(student)">
+                <a class="dropdown-item">{{student}}</a>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="selectedStudent" class="mt-3">
+            Ausgewählter Schüler: {{selectedStudent}}
+          </div>
+        </div>
+        <div class="col-md-4" *ngIf="selectedStudent">
+          <h3 class="text-primary">Fach auswählen:</h3>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="subjectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Fach
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="subjectDropdown">
+              <li *ngFor="let subject of subjects" (click)="selectSubject(subject)">
+                <a class="dropdown-item">{{subject}}</a>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="selectedSubject" class="mt-3">
+            Ausgewähltes Fach: {{selectedSubject}}
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-4" *ngIf="selectedSubject">
+        <div class="col-md-4">
+          <h3 class="text-primary">Note auswählen:</h3>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="markDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Note
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="markDropdown">
+              <li *ngFor="let mark of ['1', '2', '3', '4', '5', 'k.A']" (click)="selectMark(mark)">
+                <a class="dropdown-item">{{mark}}</a>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="selectedMark" class="mt-3">
+            Ausgewählte Note: {{selectedMark}}
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-4" *ngIf="selectedMark">
+        <div class="col-md-6">
+          <button class="btn btn-primary btn-block" (click)="confirmAssignment()">Note speichern</button>
+        </div>
+      </div>
+
+      <div class="row justify-content-center mt-4" *ngIf="submissionSuccess">
+        <div class="col-md-8">
+          <div class="alert alert-success" role="alert">
+            Sie haben dem Schüler/der Schülerin  {{selectedStudent}} der Klasse {{selectedClass}} erfolgreich die Note {{selectedMark}} im Fach {{selectedSubject}} zugesandt!
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="text-center p-3 border-top">
+    <p>&copy; 2024 HTL Donaustadt. Alle Rechte vorbehalten.</p>
+  </footer>
 </div>

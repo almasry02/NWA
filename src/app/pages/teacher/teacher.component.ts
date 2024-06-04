@@ -1,23 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { UserService } from '../../Model/user.service'; // Import UserService
 
 @Component({
   selector: 'app-teacher',
   templateUrl: './teacher.component.html',
-  styleUrls: ['./teacher.component.scss'],
-  animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('500ms', style({ opacity: 1 }))
-      ]),
-      transition(':leave', [
-        animate('500ms', style({ opacity: 0 }))
-      ])
-    ])
-  ]
+  styleUrls: ['./teacher.component.scss']
 })
 export class TeacherComponent {
   classes: string[] = ['4AHITN', '4AHITM', '3AHITN', '3AHITM'];
@@ -32,13 +20,16 @@ export class TeacherComponent {
   selectedStudent: string | null = null;
   selectedSubject: string | null = null;
   selectedMark: string | null = null;
-  loggedInUser:  string ; // Add loggedInUser variable
+  loggedInUser: string; // Add loggedInUser variable
   loggedInUserSubject: string; // Add loggedInUserSubject variable
+  confirmationMessage: boolean = false; // Add confirmationMessage variable
+  submissionSuccess: boolean = false; // Add submissionSuccess variable
 
   constructor(private router: Router, private userService: UserService) { // Inject UserService
     const loggedInUserInfo = this.userService.getLoggedInUser(); // Get loggedInUser and loggedInUserSubject from UserService
     this.loggedInUser = loggedInUserInfo.user;
-    this.loggedInUserSubject = loggedInUserInfo.subject; }
+    this.loggedInUserSubject = loggedInUserInfo.subject;
+  }
 
   selectClass(className: string): void {
     this.selectedClass = className;
@@ -53,17 +44,18 @@ export class TeacherComponent {
     this.selectedMark = null;
   }
 
-  assignMark(): void {
-    // Check if the selected subject is the same as the logged in user's subject
-    if (this.selectedSubject !== this.loggedInUserSubject) {
-      console.error('You can only assign marks for your own subject.');
-      return;
-    }
+  selectSubject(subject: string): void {
+    this.selectedSubject = subject;
+    this.confirmationMessage = true; // Show confirmation message after subject selection
+  }
 
-    // Assign the mark (selectedMark) to the selected student for the selected subject
-    // You can add the logic to save the mark to a database or send it to a server here
-    console.log(`Assigned mark ${this.selectedMark} to ${this.selectedStudent} for ${this.selectedSubject}`);
-    // Implement your logic to save the mark
+  selectMark(mark: string): void {
+    this.selectedMark = mark;
+  }
+
+  confirmAssignment(): void {
+    // Perform assignment logic here
+    this.submissionSuccess = true; // Show submission success message after assignment
   }
 
   logout(): void {
