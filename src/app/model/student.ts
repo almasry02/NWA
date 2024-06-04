@@ -9,9 +9,9 @@ export class Student extends Person {
 
 
 const Students:Student[]=[
-  new Student("student1@test.at","password2024!", 'student','4AHITN'),
-  new Student("student2@test.at","password2024!", 'student','4AHITM'),
-  new Student("student3@test.at","password2024!", 'student','3AHITN'),
-  new Student("student4@test.at","password2024!", 'student','3AHITM')
+  new Student("student1@htl.at","11", 'student','5AHITN'),
+  new Student("student2@htl.at","22", 'student','4AHITN'),
+  new Student("student3@htl.at","33", 'student','2AHIT'),
+  new Student("student4@htl.at","44", 'student','1AHIT')
 ]
 export {Students};

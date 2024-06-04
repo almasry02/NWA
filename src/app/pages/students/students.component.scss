@@ -17,6 +17,8 @@ header {
   background-color: #f8f9fa;
   border-bottom: 1px solid #e7e7e7;
   padding: 0.75rem 1rem;
+  margin: 0;  /* Ensure no margin above the header */
+  top: 0;
 }
 
 header .btn-primary {
@@ -32,10 +34,14 @@ header .btn-primary:hover {
 /* Footer styles */
 footer {
   width: 100%;
+  height: 65px; /* Fixe Höhe für den Footer */
   background-color: #f8f9fa;
   border-top: 1px solid #e7e7e7;
-  margin-top: auto;
   padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
 }
 
 /* Main content adjustments */
@@ -44,12 +50,21 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f8f9fa;
+  background-color: #ffffff; /* Hintergrund weiß setzen */
+}
+.btn-primary {
+  background-color: #0a5d93;
+  border-color: #0a5d93;
+}
+
+.btn-primary:hover {
+  background-color: darken(#0a5d93, 10%);
+  border-color: darken(#0a5d93, 10%);
 }
 
 main h1 {
   color: #0a5d93;
-  margin-top: -100px; /* Verschiebt die Überschrift höher */
+  margin-top: -150px; /* Verschiebt die Überschrift höher */
 }
 
 main .text-primary {
@@ -83,3 +98,12 @@ main .text-secondary {
   justify-content: center;
   height: 100%;
 }
+/* Zusätzliche Anpassungen */
+.dropdown {
+  margin-bottom: 20px;
+}
+
+.dropdown-menu {
+  cursor: pointer;
+}
+

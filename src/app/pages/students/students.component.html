@@ -12,26 +12,23 @@
   </header>
 
   <!-- Main Content Section -->
-  <main class="flex-grow-1 d-flex align-items-center justify-content-center bg-light py-5">
+  <main class="flex-grow-1 d-flex align-items-center justify-content-center py-5">
     <div class="container">
-      <h1 class="text-center mb-4" style="color: #0a5d93;">Willkommen auf Ihrem Noten-Dashboard</h1>
-      <p class="text-center mb-4">Bitte wählen Sie ein Fach aus, um Ihre Noten anzuzeigen:</p>
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <div class="row">
-            <div class="col-md-6 mb-4" *ngFor="let subject of subjects">
-              <div class="card subject-card h-100" (click)="viewGrades(subject)">
-                <div class="card-body text-center">
-                  <h5 class="card-title">{{subject}}</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <h1 class="text-center mb-4">Ihre Noten und Warnungen</h1>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+          Fächer
+        </button>
+        <p class="text-secondary">Wählen Sie ein Fach aus um ihre Noten und Verwarnungen zu sehen</p>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li *ngFor="let subject of subjects" (click)="viewGrades(subject)">
+            <a class="dropdown-item">{{subject}}</a>
+          </li>
+        </ul>
       </div>
       <div *ngIf="selectedSubject" class="mt-4">
-        <h2 style="color: #0a5d93;">Noten für {{selectedSubject}}</h2>
-        <p class="text-secondary">Hier werden die Noten für das ausgewählte Fach angezeigt...</p>
+        <h2>Noten für {{selectedSubject}}</h2>
+        <p class="text-secondary">//Noten//</p>
       </div>
     </div>
   </main>

@@ -9,8 +9,8 @@ export class Teacher extends Person {
 
 
 const Teachers:Teacher[]=[
-  new Teacher("teacher1@test.at","password2024!", 'teacher', 'Mathematik'),
-  new Teacher("teacher2@test.at","password2024!", 'teacher', 'Naturwissenschaften'),
-  new Teacher("teacher3@test.at","password2024!", 'teacher', 'Geschichte'),
+  new Teacher("teacher1@htl.at","11", 'teacher', 'Netzwerktechnik'),
+  new Teacher("teacher2@htl.at","22", 'teacher', 'Naturwissenschaften'),
+  new Teacher("teacher3@htl.at","33", 'teacher', 'Geschichte'),
 ]
 export {Teachers};
