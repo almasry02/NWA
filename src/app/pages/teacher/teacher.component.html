@@ -1,3 +1,4 @@
+<!-- pages/teacher/teacher.component.html -->
 <div class="container-fluid p-0">
   <!-- Header Section -->
   <header class="d-flex justify-content-between align-items-center p-3 border-bottom">
@@ -65,37 +66,26 @@
             Ausgewähltes Fach: {{selectedSubject}}
           </div>
         </div>
-      </div>
-      <div class="row justify-content-center mt-4" *ngIf="selectedSubject">
-        <div class="col-md-4">
-          <h3 class="text-primary">Note auswählen:</h3>
+        <div class="col-md-4" *ngIf="selectedSubject">
+          <h3 class="text-primary">Note hinzufügen:</h3>
           <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="markDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="gradeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
               Note
             </button>
-            <ul class="dropdown-menu" aria-labelledby="markDropdown">
-              <li *ngFor="let mark of ['1', '2', '3', '4', '5', 'k.A']" (click)="selectMark(mark)">
-                <a class="dropdown-item">{{mark}}</a>
+            <ul class="dropdown-menu" aria-labelledby="gradeDropdown">
+              <li *ngFor="let grade of grades" (click)="selectGrade(grade)">
+                <a class="dropdown-item">{{grade}}</a>
               </li>
             </ul>
           </div>
-          <div *ngIf="selectedMark" class="mt-3">
-            Ausgewählte Note: {{selectedMark}}
+          <div *ngIf="selectedGrade !== null" class="mt-3">
+            Ausgewählte Note: {{selectedGrade}}
           </div>
+          <button class="btn btn-primary mt-3" (click)="addGrade()">Note hinzufügen</button>
         </div>
       </div>
-      <div class="row justify-content-center mt-4" *ngIf="selectedMark">
-        <div class="col-md-6">
-          <button class="btn btn-primary btn-block" (click)="confirmAssignment()">Note speichern</button>
-        </div>
-      </div>
-
-      <div class="row justify-content-center mt-4" *ngIf="submissionSuccess">
-        <div class="col-md-8">
-          <div class="alert alert-success" role="alert">
-            Sie haben dem Schüler/der Schülerin  {{selectedStudent}} der Klasse {{selectedClass}} erfolgreich die Note {{selectedMark}} im Fach {{selectedSubject}} zugesandt!
-          </div>
-        </div>
+      <div *ngIf="notificationMessage" class="alert alert-success mt-4">
+        {{notificationMessage}}
       </div>
     </div>
   </main>

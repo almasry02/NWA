@@ -1,3 +1,9 @@
+// Definiert den Hintergrund des gesamten Dokuments als weiß
+body {
+  background-color: #ffffff;
+}
+
+// Container-fluid für die gesamte Seite
 .container-fluid {
   background-color: #f8f9fa;
   min-height: 100vh;
@@ -5,12 +11,19 @@
   flex-direction: column;
 }
 
-.main-body {
-  background-color: white;
+// Header und Footer unverändert lassen
+header, footer {
+  background-color: #f8f9fa; // Beispielhintergrundfarbe für Header und Footer
+   // Textfarbe für Header und Footer
+}
+
+// Hauptinhalt mit weißem Hintergrund
+main {
+  background-color: #ffffff;
   flex-grow: 1;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .selection-area {
@@ -30,7 +43,7 @@
 
     option {
       color: #0a5d93;
-      background-color: white;
+      background-color: #ffffff;
     }
   }
 }
@@ -48,6 +61,7 @@
     background-color: darken(#0a5d93, 10%);
   }
 }
+
 .text-primary {
-  color: #0a5d93 !important; // Change text color to blue
+  color: #0a5d93 !important; // Textfarbe auf Blau ändern
 }

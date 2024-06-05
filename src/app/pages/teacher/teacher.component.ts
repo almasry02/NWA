@@ -1,61 +1,70 @@
-import { Component } from '@angular/core';
+// pages/teacher/teacher.component.ts
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../Model/user.service'; // Import UserService
+import { UserService } from '../../Model/user.service';
 
 @Component({
   selector: 'app-teacher',
   templateUrl: './teacher.component.html',
   styleUrls: ['./teacher.component.scss']
 })
-export class TeacherComponent {
-  classes: string[] = ['4AHITN', '4AHITM', '3AHITN', '3AHITM'];
+export class TeacherComponent implements OnInit {
+  classes: string[] = ['5AHITN', '4AHITN', '2AHIT', '1AHIT'];
   students: { [key: string]: string[] } = {
-    '4AHITN': ['Max Mustermann', 'Lisa Müller', 'Tom Schmidt'],
-    '4AHITM': ['Anna Mayer', 'Paul Wagner', 'Sarah Huber'],
-    '3AHITN': ['Markus Meier', 'Sophie Fischer', 'Tobias Weber'],
-    '3AHITM': ['Julia Schneider', 'Simon Lehner', 'Elena Schwarz']
+    '5AHITN': ['student1@htl.at'],
+    '4AHITN': ['student2@htl.at'],
+    '2AHIT': ['student3@htl.at'],
+    '1AHIT': ['student4@htl.at']
   };
   subjects: string[] = ['Mathematik', 'Naturwissenschaften', 'Geschichte', 'Englisch'];
+  grades: number[] = [1, 2, 3, 4, 5];
+
   selectedClass: string | null = null;
   selectedStudent: string | null = null;
   selectedSubject: string | null = null;
-  selectedMark: string | null = null;
-  loggedInUser: string; // Add loggedInUser variable
-  loggedInUserSubject: string; // Add loggedInUserSubject variable
-  confirmationMessage: boolean = false; // Add confirmationMessage variable
-  submissionSuccess: boolean = false; // Add submissionSuccess variable
+  selectedGrade: number | null = null;
 
-  constructor(private router: Router, private userService: UserService) { // Inject UserService
-    const loggedInUserInfo = this.userService.getLoggedInUser(); // Get loggedInUser and loggedInUserSubject from UserService
-    this.loggedInUser = loggedInUserInfo.user;
-    this.loggedInUserSubject = loggedInUserInfo.subject;
+  notificationMessage: string | null = null;
+
+  loggedInUser: string;
+
+  constructor(private router: Router, private userService: UserService) {
+    this.loggedInUser = this.userService.getLoggedInUser().user;
   }
+
+  ngOnInit(): void {}
 
   selectClass(className: string): void {
     this.selectedClass = className;
     this.selectedStudent = null;
     this.selectedSubject = null;
-    this.selectedMark = null;
+    this.selectedGrade = null;
+    this.notificationMessage = null;
   }
 
   selectStudent(student: string): void {
     this.selectedStudent = student;
     this.selectedSubject = null;
-    this.selectedMark = null;
+    this.selectedGrade = null;
+    this.notificationMessage = null;
   }
 
   selectSubject(subject: string): void {
     this.selectedSubject = subject;
-    this.confirmationMessage = true; // Show confirmation message after subject selection
+    this.selectedGrade = null;
+    this.notificationMessage = null;
   }
 
-  selectMark(mark: string): void {
-    this.selectedMark = mark;
+  selectGrade(grade: number): void {
+    this.selectedGrade = grade;
+    this.notificationMessage = null;
   }
 
-  confirmAssignment(): void {
-    // Perform assignment logic here
-    this.submissionSuccess = true; // Show submission success message after assignment
+  addGrade(): void {
+    if (this.selectedStudent && this.selectedSubject && this.selectedGrade !== null) {
+      this.userService.addGrade(this.selectedStudent, this.selectedSubject, this.selectedGrade);
+      this.notificationMessage = `Sie haben dem Schüler ${this.selectedStudent} in ${this.selectedSubject} die Note ${this.selectedGrade} gegeben.`;
+    }
   }
 
   logout(): void {

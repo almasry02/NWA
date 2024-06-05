@@ -1,6 +1,8 @@
+// pages/students/students.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {UserService} from "../../Model/user.service";
+import { UserService } from '../../Model/user.service';
+import { Grade } from '../../Model/grade';
 
 @Component({
   selector: 'app-students',
@@ -10,27 +12,33 @@ import {UserService} from "../../Model/user.service";
 export class StudentsComponent implements OnInit {
   subjects: string[] = ['Mathematik', 'Naturwissenschaften', 'Geschichte', 'Englisch'];
   selectedSubject: string | null = null;
+  grades: Grade[] = [];
 
-  loggedInUser: string; // Add loggedInUser variable
-  loggedInUserSubject: string; // Add loggedInUserSubject variable
+  loggedInUser: string;
+  loggedInUserSubject: string;
 
-  constructor(private router: Router, private userService: UserService) { // Inject UserService
-    const loggedInUserInfo = this.userService.getLoggedInUser(); // Get loggedInUser and loggedInUserSubject from UserService
-    this.loggedInUser = loggedInUserInfo.user;
-    this.loggedInUserSubject = loggedInUserInfo.subject;
+  constructor(private router: Router, private userService: UserService) {
+    const loggedInData = this.userService.getLoggedInUser();
+    this.loggedInUser = loggedInData.user;
+    this.loggedInUserSubject = loggedInData.subject;
   }
 
   ngOnInit(): void {
+    this.loadGrades();
   }
 
-  viewGrades(subject: string): void {
+  selectSubject(subject: string): void {
     this.selectedSubject = subject;
-    // Fetch and display grades for the selected subject
-    // You can add the logic to fetch grades from a service or API here
+    this.loadGrades();
+  }
+
+  loadGrades(): void {
+    this.grades = this.selectedSubject
+      ? this.userService.getGradesForStudentAndSubject(this.loggedInUser, this.selectedSubject)
+      : this.userService.getGradesForStudent(this.loggedInUser);
   }
 
   logout(): void {
-    // Implement your logout logic here
-    this.router.navigate(['/login']); // Redirect to login page after logout
+    this.router.navigate(['/login']);
   }
 }

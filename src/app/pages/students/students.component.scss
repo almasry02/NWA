@@ -17,8 +17,6 @@ header {
   background-color: #f8f9fa;
   border-bottom: 1px solid #e7e7e7;
   padding: 0.75rem 1rem;
-  margin: 0;  /* Ensure no margin above the header */
-  top: 0;
 }
 
 header .btn-primary {
@@ -41,7 +39,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: auto;
+  z-index: 1; /* Setze den Z-Index auf 1, damit der Footer über anderen Inhalten liegt */
 }
 
 /* Main content adjustments */
@@ -52,19 +50,9 @@ main {
   justify-content: center;
   background-color: #ffffff; /* Hintergrund weiß setzen */
 }
-.btn-primary {
-  background-color: #0a5d93;
-  border-color: #0a5d93;
-}
-
-.btn-primary:hover {
-  background-color: darken(#0a5d93, 10%);
-  border-color: darken(#0a5d93, 10%);
-}
 
 main h1 {
   color: #0a5d93;
-  margin-top: -150px; /* Verschiebt die Überschrift höher */
 }
 
 main .text-primary {
@@ -75,35 +63,20 @@ main .text-secondary {
   color: #6c757d;
 }
 
-/* Subject Card Styles */
-.subject-card {
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+.btn-primary {
+  background-color: #0a5d93;
+  border-color: #0a5d93;
 }
 
-.subject-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.btn-primary:hover {
+  background-color: darken(#0a5d93, 10%);
+  border-color: darken(#0a5d93, 10%);
 }
 
-.subject-card .card-title {
-  font-size: 1.25rem;
-  margin: 0;
-  color: #0a5d93; /* Einheitliche Farbe gemäß der Logout-Button */
-}
-
-.subject-card .card-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-/* Zusätzliche Anpassungen */
-.dropdown {
-  margin-bottom: 20px;
+h3.text-primary {
+  color: #0a5d93; /* Farbe für Überschrift "Fach auswählen:" und "Noten:" */
 }
 
 .dropdown-menu {
-  cursor: pointer;
+  z-index: 2; /* Setze den Z-Index auf 2, damit die Dropdown-Liste über dem Footer liegt */
 }
-
