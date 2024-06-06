@@ -1,4 +1,3 @@
-// pages/students/students.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../Model/user.service';
@@ -14,13 +13,16 @@ export class StudentsComponent implements OnInit {
   selectedSubject: string | null = null;
   grades: Grade[] = [];
 
-  loggedInUser: string;
-  loggedInUserSubject: string;
+  loggedInUser: string = ''; // Initialisierung hier
 
   constructor(private router: Router, private userService: UserService) {
     const loggedInData = this.userService.getLoggedInUser();
-    this.loggedInUser = loggedInData.user;
-    this.loggedInUserSubject = loggedInData.subject;
+    if (loggedInData) {
+      this.loggedInUser = loggedInData.user;
+    } else {
+      // Handle error, maybe redirect to login
+      this.router.navigate(['/login']);
+    }
   }
 
   ngOnInit(): void {
@@ -33,9 +35,16 @@ export class StudentsComponent implements OnInit {
   }
 
   loadGrades(): void {
-    this.grades = this.selectedSubject
+    const gradesData = this.selectedSubject
       ? this.userService.getGradesForStudentAndSubject(this.loggedInUser, this.selectedSubject)
       : this.userService.getGradesForStudent(this.loggedInUser);
+
+    // Convert the gradesData to the Grade[] type
+    this.grades = gradesData.map(grade => ({
+      studentEmail: this.loggedInUser,
+      subject: grade.subject,
+      grade: grade.grade
+    }));
   }
 
   logout(): void {

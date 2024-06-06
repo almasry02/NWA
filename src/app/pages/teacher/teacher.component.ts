@@ -1,4 +1,3 @@
-// pages/teacher/teacher.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../Model/user.service';
@@ -26,10 +25,16 @@ export class TeacherComponent implements OnInit {
 
   notificationMessage: string | null = null;
 
-  loggedInUser: string;
+  loggedInUser: string = ''; // Initialisierung hier
 
   constructor(private router: Router, private userService: UserService) {
-    this.loggedInUser = this.userService.getLoggedInUser().user;
+    const loggedInData = this.userService.getLoggedInUser();
+    if (loggedInData) {
+      this.loggedInUser = loggedInData.user;
+    } else {
+      // Handle error, maybe redirect to login
+      this.router.navigate(['/login']);
+    }
   }
 
   ngOnInit(): void {}
