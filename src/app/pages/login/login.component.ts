@@ -36,7 +36,7 @@ export class LoginComponent {
         this.router.navigate(['/students']);
       }
     } else {
-      this.errorMessage = 'Invalid login credentials';
+      this.errorMessage = 'Anmeldedaten falsch';
     }
   }
 }

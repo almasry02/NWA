@@ -30,6 +30,10 @@
               </div>
               <button (click)="onClick(email, password)" class="btn btn-primary btn-block mt-3">Einloggen</button>
             </form>
+            <!-- Fehlermeldung anzeigen -->
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+              {{ errorMessage }}
+            </div>
           </div>
         </div>
       </div>

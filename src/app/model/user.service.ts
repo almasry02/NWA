@@ -1,35 +1,60 @@
-// Model/user.service.ts
 import { Injectable } from '@angular/core';
-import { Grade, Grades } from './grade';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private loggedInUser: string = '';
-  private loggedInUserSubject: string = '';
+  private users: { [key: string]: { password: string, role: string } } = {
+    'teacher@htl.at': { password: '1234', role: 'teacher' },
+    'student1@htl.at': { password: '5678', role: 'student' },
+    'student2@htl.at': { password: '91011', role: 'student' },
+    // Weitere Benutzer
+  };
 
-  setLoggedInUser(user: string, subject: string) {
-    this.loggedInUser = user;
-    this.loggedInUserSubject = subject;
+  private grades: { [student: string]: { [subject: string]: number } } = {};
+
+  private loggedInUser: { user: string, role: string } | null = null;
+
+  login(user: string, password: string): boolean {
+    const userData = this.users[user];
+    if (userData && userData.password === password) {
+      this.loggedInUser = { user, role: userData.role };
+      return true;
+    }
+    return false;
   }
 
-  getLoggedInUser() {
-    return {
-      user: this.loggedInUser,
-      subject: this.loggedInUserSubject
-    };
+  getLoggedInUser(): { user: string, role: string } | null {
+    return this.loggedInUser;
   }
 
-  addGrade(studentEmail: string, subject: string, grade: number) {
-    Grades.push(new Grade(studentEmail, subject, grade));
+  setLoggedInUser(user: string, role: string): void {
+    this.loggedInUser = { user, role };
   }
 
-  getGradesForStudent(studentEmail: string): Grade[] {
-    return Grades.filter(g => g.studentEmail === studentEmail);
+  addGrade(student: string, subject: string, grade: number): void {
+    if (!this.grades[student]) {
+      this.grades[student] = {};
+    }
+    this.grades[student][subject] = grade; // Überschreibt vorhandene Note für das Fach
   }
 
-  getGradesForStudentAndSubject(studentEmail: string, subject: string): Grade[] {
-    return Grades.filter(g => g.studentEmail === studentEmail && g.subject === subject);
+  getGradesForStudent(student: string): { subject: string, grade: number }[] {
+    const studentGrades = this.grades[student];
+    if (!studentGrades) {
+      return [];
+    }
+    return Object.keys(studentGrades).map(subject => ({
+      subject,
+      grade: studentGrades[subject]
+    }));
+  }
+
+  getGradesForStudentAndSubject(student: string, subject: string): { subject: string, grade: number }[] {
+    const studentGrades = this.grades[student];
+    if (!studentGrades || !studentGrades[subject]) {
+      return [];
+    }
+    return [{ subject, grade: studentGrades[subject] }];
   }
 }
