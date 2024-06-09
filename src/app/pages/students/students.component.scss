@@ -17,6 +17,7 @@ header {
   background-color: #f8f9fa;
   border-bottom: 1px solid #e7e7e7;
   padding: 0.75rem 1rem;
+
 }
 
 header .btn-primary {
@@ -60,7 +61,7 @@ main .text-primary {
 }
 
 main .text-secondary {
-  color: #6c757d;
+  color: #0a5d93;
 }
 
 .btn-primary {
@@ -73,10 +74,14 @@ main .text-secondary {
   border-color: darken(#0a5d93, 10%);
 }
 
-h3.text-primary {
+h3 {
   color: #0a5d93; /* Farbe für Überschrift "Fach auswählen:" und "Noten:" */
 }
 
 .dropdown-menu {
   z-index: 2; /* Setze den Z-Index auf 2, damit die Dropdown-Liste über dem Footer liegt */
+}
+
+.text-primary {
+  color: #0a5d93 !important; // Textfarbe auf Blau ändern
 }
