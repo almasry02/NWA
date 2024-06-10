@@ -1,8 +1,12 @@
 import { Person } from './person';
 import {View} from "./view";
+import {UserService} from "./user.service";
 export class Teacher extends Person {
   constructor( email: String,  password: String,  userType: String, gegenstand: String) {
     super(email, password, userType, '' ,gegenstand);
+  }
+  addWarning(student: string, warning: string, userService: UserService): void {
+    userService.addWarning(student, warning);
   }
 }
 

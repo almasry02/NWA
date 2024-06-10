@@ -12,6 +12,7 @@ export class StudentsComponent implements OnInit {
   subjects: string[] = ['Mathematik', 'Naturwissenschaften', 'Geschichte', 'Englisch'];
   selectedSubject: string | null = null;
   grades: Grade[] = [];
+  warnings: string[] = [];
 
   loggedInUser: string = ''; // Initialisierung hier
 
@@ -27,11 +28,13 @@ export class StudentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadGrades();
+    this.loadWarnings();
   }
 
   selectSubject(subject: string): void {
     this.selectedSubject = subject;
     this.loadGrades();
+    this.loadWarnings();
   }
 
   loadGrades(): void {
@@ -45,6 +48,10 @@ export class StudentsComponent implements OnInit {
       subject: grade.subject,
       grade: grade.grade
     }));
+  }
+
+  loadWarnings(): void {
+    this.warnings = this.userService.getWarningsForStudent(this.loggedInUser);
   }
 
   logout(): void {

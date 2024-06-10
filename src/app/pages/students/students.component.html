@@ -41,6 +41,10 @@
               <td>{{grade.subject}}</td>
               <td>{{grade.grade}}</td>
             </tr>
+            <h3 class="text-primary">Frühwarnungen:</h3>
+            <ul>
+              <li *ngFor="let warning of warnings">{{ warning }}</li>
+            </ul>
             </tbody>
           </table>
         </div>
@@ -50,6 +54,8 @@
       </div>
     </div>
   </main>
+
+
 
   <!-- Header Section -->
   <header class="fixed-top d-flex justify-content-between align-items-center p-3 border-bottom">

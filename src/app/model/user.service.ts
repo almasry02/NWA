@@ -12,6 +12,7 @@ export class UserService {
   };
 
   private grades: { [student: string]: { [subject: string]: number } } = {};
+  private warnings: { [student: string]: string[] } = {};
 
   private loggedInUser: { user: string, role: string } | null = null;
 
@@ -57,4 +58,22 @@ export class UserService {
     }
     return [{ subject, grade: studentGrades[subject] }];
   }
+
+  getStudents(): string[] {
+    return Object.keys(this.users).filter(email => this.users[email].role === 'student');
+  }
+
+  addWarning(student: string, warning: string): void {
+    if (!this.warnings[student]) {
+      this.warnings[student] = [];
+    }
+    this.warnings[student].push(warning);
+  }
+
+  getWarningsForStudent(student: string): string[] {
+    return this.warnings[student] || [];
+  }
 }
+
+
+

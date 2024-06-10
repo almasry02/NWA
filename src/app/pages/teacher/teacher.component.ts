@@ -17,11 +17,13 @@ export class TeacherComponent implements OnInit {
   };
   subjects: string[] = ['Mathematik', 'Naturwissenschaften', 'Geschichte', 'Englisch'];
   grades: number[] = [1, 2, 3, 4, 5];
+  warnings: string[] = ['Zu viele Fehlstunden', 'Unzureichende Leistung', 'Verhaltensprobleme'];
 
   selectedClass: string | null = null;
   selectedStudent: string | null = null;
   selectedSubject: string | null = null;
   selectedGrade: number | null = null;
+  selectedWarning: string = '';
 
   notificationMessage: string | null = null;
 
@@ -37,7 +39,9 @@ export class TeacherComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 
   selectClass(className: string): void {
     this.selectedClass = className;
@@ -71,6 +75,17 @@ export class TeacherComponent implements OnInit {
       this.notificationMessage = `Sie haben dem Schüler ${this.selectedStudent} in ${this.selectedSubject} die Note ${this.selectedGrade} gegeben.`;
     }
   }
+
+  addWarning(): void {
+    const loggedInUser = this.userService.getLoggedInUser();
+    if (loggedInUser && loggedInUser.role === 'teacher' && this.selectedStudent && this.selectedWarning) {
+      this.userService.addWarning(this.selectedStudent, this.selectedWarning);
+      //this.selectedStudent = '';
+      //this.selectedWarning = '';
+      this.notificationMessage = `Sie haben dem Schüler ${this.selectedStudent}  eine Frühwarnung gegeben.`;
+    }
+  }
+
 
   logout(): void {
     this.router.navigate(['/login']);
